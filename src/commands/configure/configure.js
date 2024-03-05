@@ -61,7 +61,7 @@ module.exports = {
         await interaction
             .awaitModalSubmit({ 
                 filter: (i) =>  i.customId === `settings-modal-${interaction.id}-${interaction.user.id}`,
-                time: 10_000
+                time: 300_000
              })
             .then(async (modalInteraction) => {
                 let configuration = { };
@@ -76,9 +76,9 @@ module.exports = {
 
                 let reply = `:white_check_mark: Your configuration has been saved and validated.`
                 if(validations?.length) {
-                    validations.push('\n**Please run the \`/configure\` command again to fix the errors.**')
+                    validations.push('\n**Please run the \`/configure\` command again to fix the errors.\nThe bot will not run correctly until these issues are resolved.**')
                     const validationMessages = validations.join('\n');
-                    reply = `:x: **Your configuration was saved but there are some validation errors**\n${validationMessages}`;
+                    reply = `:x: **Your configuration has some validation errors**\n${validationMessages}`;
                 }
                 modalInteraction.reply({
                     content: reply,

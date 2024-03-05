@@ -3,71 +3,84 @@
 Welcome to the SlashKey bot for World of Warcraft!  
 This bot is designed to help you easily create and manage mythic+ runs within your Discord server.
 
+> The bot has been updated for Dragonflight Season 3
+
 **Disclaimer:** This bot is not affiliated with or endorsed by Blizzard Entertainment. World of Warcraft is a registered trademark of Blizzard Entertainment, Inc.
-
-## 🔢 Latest version - 1.0.0
-
-This version works for **Season 3 of Dragonflight**, it will be updated whenever a new Mythic+ season starts.
 
 ## 📚 Features
 
 - **Run Creation**: Easily create mythic+ runs by specifying the dungeon, key level, and desired roles.
-- **Role Assignment**: Automatically assign roles to participants based on their chosen reaction.
-- **Configurability**: Customize various aspects of the bot's behavior using the `config.json` file.
+- **Ping notifications**: Missing roles will automatically be pinged in the Discord where the run is posted.
+- **Run Signups**: Sign up to created runs by using the Discord reaction system.
+- **Configurability**: Configure the settings for the bot specifically for your Discord server.
 
-## ✅ Installation
+## 📑 Changelog
 
-1. Clone this repository to your local machine or server.
-2. Install dependencies by running `npm install`.
-3. **Rename the `example.env` file** to `.env` and set your bot token   
-*(depending on where you're running this code you might need to set an environment variable on your hosting service instead of in a `.env` file)*
-4. Configure the bot by editing the `config.json` file.
-5. Start the bot by running `node src/index.js` or `npm start`.  
-*(again, depending on where you're running this code you might need to use different commands to run the code)*
+### 1.0.0 - Initial commit
 
-## 📝 Environment variables
+- Works for World of Warcraft - Dragonflight - Season 3
+- Added `/configurate` and `/key` commands
 
-For this bot to run, you will need a `bot token` to be set in the environment variables (`.env` for localhost, but it might be different depending on where you're hosting the bot).  
-The only variable that needs to be set is the `TOKEN` variable.
+## 🛑 Requirements
 
-For example:  
-``
-TOKEN = <token>
-``  
-*replacing `<token>` by your bot token*
+### Make sure your server has the needed Discord roles!
 
-More information on how to create a discord bot and get its token to use can be found [here](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)  
-Information on how to host a discord bot can be found all over the internet so I won't go into the million different ways people do it.
-
-## 🧮 Discord roles
-
-As a prerequisite for using this bot, your discord server should have the following roles:
+As a prerequisite for using this bot, your Discord server should have the following roles:
 > The roles don't have to be named exactly like in this example as the bot uses their id's to work,  
 but you need to have these four roles in order for the bot to work correctly.
-- `Tank`
-- `Healer`
-- `Dps`
-- `SomeAdminRole`
+- `Tank` (used for pinging tanks)
+- `Healer` (used for pinging healers)
+- `Dps` (used for pinging dps)
+- `SomeAdminRole` (used to grant certain people more privileges for the bot)
 
+## ✅ Getting started
 
-## 🔧 Configuration
+### 1️⃣ Invite the bot to your discord
 
-In the sourcecode there is an `example.config.json` file with several properties that can be set.  
-First **rename this file to `config.json`** and then add the correct properties to it. 
-- `devRole`: the role id for admins of the bot
-- `tankRole`: the role id used for the `Tank` role
-- `healerRole`: the role id used for the `Healer` role
-- `dpsRole`: the role id used for the `Dps` role
-- `logChannelId`: the channel id where you would like the bot to log to
-- `debugEnabled`: by default the bot only logs a `ready` event, but setting this to true will also log any debug statements
+Use [this link](https://discord.com/oauth2/authorize?client_id=1214206044168003614&permissions=2147494976&scope=bot+applications.commands) to invite SlashKey to your discord server  
 
+### 2️⃣ Configure the bot
 
-## ▶️ Usage
+Before the bot can be up and running, it will need some specific information from your server.  
+Use the `/configure` command to do so (this is restricted to server administrators - **TODO**).
 
-### Creating a run
+![SlashKey configure command example](/assets/slashkey-configurate-command.png "SlashKey configure command example")
 
+The following modal window will show up in your discord, make sure you have all the needed information at hand to fill it out completely.  
+*(all fields are required for the bot to run smoothly)*
+
+![SlashKey configure modal example](/assets/slashkey-configurate-modal.png "SlashKey configure modal example")
+ 
+
+| Setting      | Description | Used for |
+| ----------- | ----------- | - |
+| BOT MAINTAINER ROLE      | The role id for admins of the bot  | Using the `🔒` reaction on a posted run can only be done by the author of the key or a user with this role |
+| TANK ROLE   | The role id used for the `Tank` role        | Role used to ping tanks, should they be needed for a posted run |
+| HEALER ROLE   | The role id used for the `Healer` role        | Role used to ping healers, should they be needed for a posted run |
+| DPS ROLE   | The role id used for the `Dps` role        | Role used to ping dps, should they be needed for a posted run |
+| LOG CHANNEL   | The channel id the bot can log to        | The logchannel is used for the bot's error messages and debug messages (if debugging is enabled) |
+  
+### 3️⃣ Validate the configuration
+
+After submitting this form, the bot will first validate the configuration, it will check if the given role id's are actual roles and if the log channel id is an actual text channel in your Discord server.
+
+If everything is validated correctly, the user that executed the `/configure` command will receive a message that the configuration has been saved.
+
+![SlashKey configure validation success example](/assets/slashkey-configurate-validation-success.png "SlashKey configure validation success example")
+
+If there were any validation errors, there will be a message detailing the errors in the configuration.
+
+![SlashKey configure validation erriors example](/assets/slashkey-configurate-validation-failed.png "SlashKey configure validation errors example")
+
+### 4️⃣ Run a key
+#### /key command
 To create a new mythic+ run, simply use the `/key` command.  
 The bot will then reply you with a prompt to get all the necessary information to start organize the run.
+
+> Your server's configuration will again be validated here, to make sure everything is in order to set up the run.  
+If that validation fails, the command stops and a message will be shown in the chat to indicate the mistakes with the configuration.
+
+![SlashKey command example](/assets/slashkey-key-command.png "SlashKey command example")
 
 **Prompts:**
 - **dungeon** (*required*): gives you a selection of dungeons to choose from
@@ -77,11 +90,8 @@ The bot will then reply you with a prompt to get all the necessary information t
 - **dps** (*required*): type in a number (0-3) depending on how many dps your run needs
 - **remark** (*optional*): allows you to optionally add a remark to the run (will be shown in the description of the signup template)
 
-### Example
-#### /key command
-![SlashKey command example](/assets/slashkey-command.png "SlashKey command example")
+#### Signup message
 
-#### Resulting signup message
 After running the command, a signup message will be posted into the chat, pinging the missing roles for the run.  
 
 ![SlashKey signup message example](/assets/slashkey-embed.png "SlashKey signup message example")
@@ -94,15 +104,32 @@ People can sign up for a run by reacting with the appropriate role icon
 If you want to unsign from a run, just click the react button again to remove your reaction.  
 If you changed your mind and want to swap role, unsign first by removing your reaction, and then sign for the correct one.  
 
-After signing up for a run, that discord member will be listed in the signup message
+After signing up for a run, that Discord member will be listed in the signup message.
 
 ![SlashKey signed example](/assets/slashkey-embed-signed.png "SlashKey signed example")
 
 #### Locking the run
 
 There's an extra reaction added to each run, the `🔒` reaction, this is used to close the run so it doesn't accept anymore signups.
-> This one only accepts clicks from the author of the run or anyone in the discord that has the `devRole` configured in the `config.json` file.
+> This reaction only accepts clicks from the author of the run or anyone in the Discord that has the `BOT MAINTAINER ROLE` configured in the servers configuration.
 
 #### Timeout
 By default, any posted run will automatically close after 10 minutes.  
 This setting is not configurable for now, but I might add the option in a later version.
+
+### 5️⃣ Hope you have friends that'll join you!
+And go slay some demons/dragons/dwarves for purple pixels!
+
+![Mythic Plus](https://media.makeameme.org/created/goes-into-mythic.jpg "Mythic Plus")
+
+## 📃 License
+
+If you want to create your own bot, feel free to use this code however you want.  
+Fork it, copy it, paste it, make love to it...
+
+There's a fair few resources on the interwebs on how to create discord bots and slash commands, as well as information on hosting bots on your own or a remote server.  
+
+This bot was made with JavaScript, and one of the better resources on the `discord.js` library can be found [here](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)  
+
+Another good source of information that I used while making this bot were the videos of [Under Ctrl](https://www.youtube.com/@UnderCtrl).  
+Be sure to check him out and support his channel!

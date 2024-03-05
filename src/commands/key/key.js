@@ -5,7 +5,7 @@ const { validateSettings } = require('../../utils/settings');
 
 const { getGuild } = require('../../utils/db');
 
-const collectorTimeOut = 600000;
+const collectorTimeOut = 600_000;
 const dungeons = [
     `Atal'Dazar`, `Blackrook Hold`, `Darkheart Thicket`, `Dawn: Galakrond's Fall`, `Dawn: Murozond's Rise`, `The Everbloom`, `Throne of the Tides`, `Waycrest Manor`
 ]
