@@ -2,7 +2,6 @@ require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
 const { CommandKit } = require('commandkit');
 const path = require('path');
-const { devRole } = require('../config.json');
  
 const client = new Client({
     intents: [
@@ -17,7 +16,6 @@ new CommandKit({
   client,
   commandsPath: path.join(__dirname, 'commands'),
   eventsPath: path.join(__dirname, 'events'),
-  devRoleIds: [devRole],
   skipBuiltInValidations: true,
   bulkRegister: true,
 });

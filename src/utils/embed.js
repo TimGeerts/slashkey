@@ -1,5 +1,3 @@
-const { getEmojiForRole } = require('./emoji')
-
 module.exports = {
     closeEmbed: (embed) => {
         embed
@@ -8,13 +6,13 @@ module.exports = {
             .setTitle(embed.data.title.replace('[LFG]', '[CLOSED]'))
             .setDescription('*Signups are closed*');
     },
-    updateEmbed: (embed, userId, role, add = true) => {
+    updateEmbed: (embed, userId, roleEmoji, add = true) => {
         if (!embed?.data?.fields) return;
         const userTag = `<@${userId}>`;
         // determine if the current user has already signed (only used for 'add' action)
         const signed = embed.data.fields.some((f) => f.value === userTag);
         // determine the fields we need based on the role/emoji
-        const fields = embed.data.fields.filter((f) => f.name === getEmojiForRole(role));
+        const fields = embed.data.fields.filter((f) => f.name === roleEmoji);
 
         // if the reaction is to "add" an unexisting signup
         if (add && !signed) {
