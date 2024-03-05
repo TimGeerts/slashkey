@@ -3,14 +3,14 @@ const { Client, GatewayIntentBits } = require('discord.js');
 const { CommandKit } = require('commandkit');
 const { init } = require('./utils/db');
 const path = require('path');
- 
+
 const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildMessageReactions,
-        GatewayIntentBits.MessageContent,
-    ],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
 new CommandKit({
