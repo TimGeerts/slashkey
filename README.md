@@ -18,20 +18,21 @@ This bot is designed to help you easily create and manage mythic+ runs within yo
 
 ### 1.0.0 - Initial commit
 
-- Works for World of Warcraft - Dragonflight - Season 3
-- Added `/configurate` and `/key` commands
+- Added Dragonflight Season 3 dungeons
+- Added `/configure` and `/key` commands
 
 ## 🛑 Requirements
 
 ### Make sure your server has the needed Discord roles!
 
 As a prerequisite for using this bot, your Discord server should have the following roles:
-> The roles don't have to be named exactly like in this example as the bot uses their id's to work,  
-but you need to have these four roles in order for the bot to work correctly.
 - `Tank` (used for pinging tanks)
 - `Healer` (used for pinging healers)
 - `Dps` (used for pinging dps)
 - `SomeAdminRole` (used to grant certain people more privileges for the bot)
+
+> The roles don't have to be named exactly like in this example as the bot uses their id's to work,  
+but you need to have these four roles in order for the bot to work correctly.
 
 ## ✅ Getting started
 
@@ -42,7 +43,8 @@ Use [this link](https://discord.com/oauth2/authorize?client_id=12142060441680036
 ### 2️⃣ Configure the bot
 
 Before the bot can be up and running, it will need some specific information from your server.  
-Use the `/configure` command to do so (this is restricted to server administrators - **TODO**).
+Use the `/configure` command to do so 
+> After the first successful usage of the `/configure` command, this command will be restricted to users with the `BOT MAINTAINER ROLE` role.
 
 ![SlashKey configure command example](/assets/slashkey-configurate-command.png "SlashKey configure command example")
 
@@ -54,7 +56,7 @@ The following modal window will show up in your discord, make sure you have all 
 
 | Setting      | Description | Used for |
 | ----------- | ----------- | - |
-| BOT MAINTAINER ROLE      | The role id for admins of the bot  | Using the `🔒` reaction on a posted run can only be done by the author of the key or a user with this role |
+| BOT MAINTAINER ROLE      | The role id for admins of the bot  | Using the `🔒` reaction on a posted run can only be done by the author of the key or a user with this role using the `/configure` command is also restricted to this role after its first usage |
 | TANK ROLE   | The role id used for the `Tank` role        | Role used to ping tanks, should they be needed for a posted run |
 | HEALER ROLE   | The role id used for the `Healer` role        | Role used to ping healers, should they be needed for a posted run |
 | DPS ROLE   | The role id used for the `Dps` role        | Role used to ping dps, should they be needed for a posted run |
@@ -115,7 +117,7 @@ There's an extra reaction added to each run, the `🔒` reaction, this is used t
 
 #### Timeout
 By default, any posted run will automatically close after 10 minutes.  
-This setting is not configurable for now, but I might add the option in a later version.
+This setting is not configurable for now.
 
 ### 5️⃣ Hope you have friends that'll join you!
 And go slay some demons/dragons/dwarves for purple pixels!
