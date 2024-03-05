@@ -1,24 +1,35 @@
-const { getSettings } = require("./settings");
+const { ChannelType } = require('discord.js');
 
 module.exports = {
-    log: async (message, prefix, guild = null) => {
-        const guildSettings = await getSettings(guild.id);
-        const logChannel = guild.channels.cache.find(c => c.id === guildSettings.logChannelId);
-        const timestamp = `[${new Date().toISOString()}]`;
-        const msg = `${prefix} - ${timestamp}\n${message}`;
-        if(logChannel) {
-            logChannel.send(msg);
-        } else {
-            console.log(msg);
+    getLogChannel: (guildConfiguration, guild) => {
+        try {
+            let ret = null;
+            if(guildConfiguration?.id && guildConfiguration?.logChannelId) {
+                ret = guild.channels.cache.find(c => c.id === guildConfiguration.logChannelId && c.type === ChannelType.GuildText);
+            }
+            return ret;
+        } catch (error) {
+            console.log(error);
         }
     },
-    logError: (message, guild) => {
-        module.exports.log(message, ':red_circle: ERROR', guild);
+    logError: (message, channel) => {
+        module.exports.log(message, ':red_circle: ERROR', channel);
     },
-    logDebug: async (message, guild) => {
-        const guildSettings = await getSettings(guild.id);
-        if(guildSettings?.debugEnabled === 'true') {
-            module.exports.log(message, ':orange_circle: DEBUG', guild);
+    logDebug: (message, guildConfiguration, channel) => {
+        if(guildConfiguration?.id && guildConfiguration?.debugEnabled === true) {
+            module.exports.log(message, ':orange_circle: DEBUG', channel);
+        }
+        // if(guildSettings?.debugEnabled === 'true') {
+        //     module.exports.log(message, ':orange_circle: DEBUG', channel);
+        // }
+    },
+    log: async (message, prefix, channel = null) => {
+        const timestamp = `[${new Date().toISOString()}]`;
+        const msg = `${prefix} - ${timestamp}\n${message}`;
+        if(channel) {
+            channel.send(msg);
+        } else {
+            console.log(msg);
         }
     }
 }

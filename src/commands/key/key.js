@@ -1,7 +1,9 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { closeEmbed, updateEmbed } = require('../../utils/embed');
 const { logDebug } = require('../../utils/logger');
-const { getSettings, validateSettings } = require('../../utils/settings');
+const { validateSettings } = require('../../utils/settings');
+
+const { getGuild } = require('../../utils/db');
 
 const collectorTimeOut = 600000;
 const dungeons = [
@@ -59,8 +61,8 @@ module.exports = {
     run: async ({ interaction }) => {
         const guild = interaction.guild;
         const guildId = guild.id;
-        // check if a configuration for this guild exists
-        const guildSettings = await getSettings(guildId);
+        const guildSettings = await getGuild(guildId);
+
         if(!guildSettings) {
             interaction.reply(`Configuration for your server wasn't found.\nPlease have an administrator run the \`/configure\` command first.`)
             return;
