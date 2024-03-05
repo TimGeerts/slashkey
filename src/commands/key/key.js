@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { closeEmbed, updateEmbed } = require('../../utils/embed');
-const { logDebug } = require('../../utils/logger');
+const { logDebug, getLogChannel } = require('../../utils/logger');
 const { validateSettings } = require('../../utils/settings');
 
 const { getGuild } = require('../../utils/db');
@@ -88,7 +88,7 @@ module.exports = {
       return;
     }
     // if the settings are found, validate them (check roles and shit)
-    const validations = validateSettings(guildSettings, interaction.guild);
+    const validations = validateSettings(guildSettings, guild);
     if (validations?.length) {
       validations.push(
         '\n**Please have an administrator run the `/configure` command again.**'
@@ -100,8 +100,13 @@ module.exports = {
       return;
     }
     // all settings are present and have been validated, continue with the command
-    logDebug(`\`/key\` SlashCommand executed`, guild);
-    logDebug(`args: \`${JSON.stringify(interaction.options)}\``, guild);
+    const logChannel = getLogChannel(guildSettings, guild);
+    logDebug(`\`/key\` SlashCommand executed`, guildSettings, logChannel);
+    logDebug(
+      `args: \`${JSON.stringify(interaction.options)}\``,
+      guildSettings,
+      logChannel
+    );
     const dungeon = interaction.options.get('dungeon').value;
     const keyLevel = interaction.options.get('level').value;
     const tankNeeded = interaction.options.get('tank').value;
@@ -146,31 +151,44 @@ module.exports = {
       embed.addFields({ name: Emoji['Dps'], value: '...' });
     }
 
-    logDebug(`missing roles: \`${JSON.stringify(rolesMissing)}\``, guild);
+    logDebug(
+      `missing roles: \`${JSON.stringify(rolesMissing)}\``,
+      guildSettings,
+      logChannel
+    );
     const pingString = rolesMissing.map((r) => `<@&${r.id}>`).join(' ');
-    logDebug(`generated pingstring \`${pingString}\``, guild);
+    logDebug(
+      `generated pingstring \`${pingString}\``,
+      guildSettings,
+      logChannel
+    );
     await interaction.reply({
       content: `Setting up a key for ${dungeon} +${keyLevel}\nGood luck and have fun!\n*I hope you're popular enough so people join!*`,
       ephemeral: true,
     });
-    logDebug(`sent ephemeral message`, guild);
+    logDebug(`sent ephemeral message`, guildSettings, logChannel);
     let pingMessage = await interaction.channel.send(pingString);
-    logDebug(`sent pingstring`, guild);
+    logDebug(`sent pingstring`, guildSettings, logChannel);
     const message = await interaction.channel.send({ embeds: [embed] });
-    logDebug(`sent embed message`, guild);
+    logDebug(`sent embed message`, guildSettings, logChannel);
 
     // add role reactions
     rolesMissing.forEach((r) => {
       message.react(r.emoji);
       logDebug(
         `added reaction for \`${JSON.stringify(r.name)}\` using emoji ${r.emoji}`,
-        guild
+        guildSettings,
+        logChannel
       );
     });
 
     // add generic lock reactions
     message.react('🔒');
-    logDebug(`added reaction for \`"Close"\` using emoji 🔒`, guild);
+    logDebug(
+      `added reaction for \`"Close"\` using emoji 🔒`,
+      guildSettings,
+      logChannel
+    );
 
     // set up reaction object for filtering so nothing else triggers the collector
     const allowedReactions = [...rolesMissing.map((r) => r.emoji), '🔒'];
@@ -189,7 +207,8 @@ module.exports = {
     collector.on('collect', async (reaction, user) => {
       logDebug(
         `reaction \`${reaction.emoji.name}\` collected for user \`${user.id}\``,
-        guild
+        guildSettings,
+        logChannel
       );
       // check if the user is the author of the interaction
       const userIsAuthor = user.id === interaction.user.id;
@@ -201,7 +220,8 @@ module.exports = {
 
       logDebug(
         `userIsAuthor: \`${userIsAuthor}\` - userHasDevRole \`${userHasDevRole}\``,
-        guild
+        guildSettings,
+        logChannel
       );
 
       let roleToAssign = {};
@@ -213,13 +233,18 @@ module.exports = {
             closeEmbed(embed);
             message.reactions.removeAll();
             message.edit({ embeds: [embed] });
-            logDebug(`message closed and reactions removed`, guild);
+            logDebug(
+              `message closed and reactions removed`,
+              guildSettings,
+              logChannel
+            );
           } else {
             // ignore the reaction
             reaction.users.remove(user);
             logDebug(
               `user \`${user.id}\` not allowed to use '🔒' reaction`,
-              guild
+              guildSettings,
+              logChannel
             );
           }
           break;
@@ -233,7 +258,8 @@ module.exports = {
           message.edit({ embeds: [embed] });
           logDebug(
             `user \`${user.id}\` has been assigned the \`${roleToAssign.name}\` role`,
-            guild
+            guildSettings,
+            logChannel
           );
           break;
       }
@@ -248,7 +274,8 @@ module.exports = {
       message.edit({ embeds: [embed] });
       logDebug(
         `rolereaction \`${roleToRemove.name}\` has been removed for user \`${user.id}\``,
-        guild
+        guildSettings,
+        logChannel
       );
     });
 
@@ -260,7 +287,8 @@ module.exports = {
       message.edit({ embeds: [embed] });
       logDebug(
         `collector timed out, removed reactions and closed message`,
-        guild
+        guildSettings,
+        logChannel
       );
     });
   },
