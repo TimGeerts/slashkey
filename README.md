@@ -136,14 +136,15 @@ And go slay some demons/dragons/dwarves for purple pixels!
 
 ![Mythic Plus](https://media.makeameme.org/created/goes-into-mythic.jpg 'Mythic Plus')
 
-## 📃 License
+## 📃 License & Information
 
 If you want to create your own bot, feel free to use this code however you want.  
 Fork it, copy it, paste it, make love to it...
 
 There's a fair few resources on the interwebs on how to create discord bots and slash commands, as well as information on hosting bots on your own or a remote server.
 
-This bot was made with JavaScript, and one of the better resources on the `discord.js` library can be found <a href="https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot" target="_blank">here</a>.
+This bot was made with JavaScript, and one of the better resources on the `discord.js` library can be found <a href="https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot" target="_blank">here</a>.  
+For data storage I opted to use <a href="https://supabase.com/" target="_blank">Supabase</a>, it's the first time I've used it in a project (usually I go for <a href="https://firebase.google.com/" target="_blank">Firebase</a>) and it seems extremely versatile for quick and easy "backends".
 
 Another good source of information that I used while making this bot were the videos of <a href="https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot" target="_blank">Under Ctrl</a>.  
 Be sure to check him out and support his channel!
