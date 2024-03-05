@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, Component } = require("discord.js");
-const { getSettings, putSettings, validateSettings } = require('../../utils/settings');
-const { logDebug, logError } = require("../../utils/logger");
+const { validateSettings } = require('../../utils/settings');
+const { logError, logDebug, getLogChannel } = require('../../utils/logger');
+const { getGuild, setGuild } = require('../../utils/db');
 
 const inputFields = [
     {
@@ -33,16 +34,17 @@ module.exports = {
     run: async ({ interaction }) => {
         const guild = interaction.guild;
         const guildId = guild.id;
-        const guildSettings = await getSettings(guildId);
+        const guildSettings = await getGuild(guildId);
+        const logChannel = getLogChannel(guildSettings, guild);
         const modal = new ModalBuilder({
-            customId: `settings-modal-${interaction.user.id}`,
+            customId: `settings-modal-${interaction.id}-${interaction.user.id}`,
             title: `Configure SlashKey`
         });
 
         let rows = [];
 
         inputFields.forEach((field) => {
-            const val = guildSettings ? guildSettings[field.customId]: ''
+            const val = guildSettings && guildSettings[field.customId] ? guildSettings[field.customId]: ''
             const t = new TextInputBuilder({
                 customId: field.customId,
                 label: field.label,
@@ -58,8 +60,8 @@ module.exports = {
         // wait for the modal to be submitted
         await interaction
             .awaitModalSubmit({ 
-                filter: (i) =>  i.customId === `settings-modal-${interaction.user.id}`,
-                time: 300000
+                filter: (i) =>  i.customId === `settings-modal-${interaction.id}-${interaction.user.id}`,
+                time: 10_000
              })
             .then(async (modalInteraction) => {
                 let configuration = { };
@@ -68,27 +70,23 @@ module.exports = {
                     configuration[field.customId] = val;
                 });
                 configuration['debugEnabled'] = "false";
-                await putSettings(guildId, configuration);
+                configuration['id'] = guildId;
+                await setGuild(configuration);
                 const validations = validateSettings(configuration, guild);
 
+                let reply = `:white_check_mark: Your configuration has been saved and validated.`
                 if(validations?.length) {
                     validations.push('\n**Please run the \`/configure\` command again to fix the errors.**')
                     const validationMessages = validations.join('\n');
-                    modalInteraction.reply({
-                        content: `:x: **Your configuration was saved but there are some validation errors**\n${validationMessages}`,
-                        ephemeral: true
-                    });
-                } else {
-                    logDebug('this is a test', interaction.guild);
-                    // reply to the modal
-                    modalInteraction.reply({
-                        content: `:white_check_mark: Your configuration has been saved and validated.`,
-                        ephemeral: true
-                    });
+                    reply = `:x: **Your configuration was saved but there are some validation errors**\n${validationMessages}`;
                 }
+                modalInteraction.reply({
+                    content: reply,
+                    ephemeral: true
+                });
             })
             .catch((err) => {
-                logError(err.message, interaction.guild);
+                logError(err.message, logChannel);
             });
     },
     

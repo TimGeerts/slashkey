@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
 const { CommandKit } = require('commandkit');
+const { init } = require('./utils/db');
 const path = require('path');
  
 const client = new Client({
@@ -21,3 +22,4 @@ new CommandKit({
 });
 
 client.login(process.env.TOKEN);
+init(process.env.SUPABASE, process.env.SUPA_SERVICE_ROLE);
