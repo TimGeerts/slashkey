@@ -1,6 +1,6 @@
-# 🗝️ SlashKey - Mythic+ run organizer bot for World of Warcraft
+# 🗝️ SlashKey - Mythic+ Discord Bot
 
-Welcome to the SlashKey bot for World of Warcraft!  
+Welcome to the SlashKey Discord Bot for World of Warcraft!  
 This bot is designed to help you easily create and manage mythic+ runs within your Discord server.
 
 > The bot has been updated for Dragonflight Season 3
