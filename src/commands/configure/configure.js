@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, Component } = require("discord.js");
 const { validateSettings } = require('../../utils/settings');
-const { logError, logDebug, getLogChannel } = require('../../utils/logger');
+const { logError, getLogChannel } = require('../../utils/logger');
 const { getGuild, setGuild } = require('../../utils/db');
 
 const inputFields = [
@@ -32,9 +32,26 @@ module.exports = {
         .setDescription('Shows a modal to configure the bot settings'),
     
     run: async ({ interaction }) => {
+        // initially allow the command by default
+        let commandAllowed = true;
         const guild = interaction.guild;
         const guildId = guild.id;
         const guildSettings = await getGuild(guildId);
+
+        if(guildSettings && guildSettings.devRole) {
+            // if there's saved guildsettings, check if the user has the dev role to execute this command
+            const memberForUser = await interaction.guild.members.fetch(interaction.user.id);
+            commandAllowed = memberForUser.roles.cache.some((r) => r.id === guildSettings.devRole);
+        }
+        
+        if(!commandAllowed) {
+            interaction.reply({
+                content: `You don't have the correct role to execute the \`/configure\` command.`,
+                ephemeral: true
+            });
+            return;
+        }
+
         const logChannel = getLogChannel(guildSettings, guild);
         const modal = new ModalBuilder({
             customId: `settings-modal-${interaction.id}-${interaction.user.id}`,

@@ -37,8 +37,11 @@ but you need to have these four roles in order for the bot to work correctly.
 ## ✅ Getting started
 
 ### 1️⃣ Invite the bot to your discord
+**Link coming soon!**
 
-Use [this link](https://discord.com/oauth2/authorize?client_id=1214206044168003614&permissions=2147494976&scope=bot+applications.commands) to invite SlashKey to your discord server  
+[//]: # (https://discord.com/oauth2/authorize?client_id=1214206044168003614&permissions=2147494976&scope=bot+applications.commands)
+
+Use <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">this link</a> to invite SlashKey to your discord server  
 
 ### 2️⃣ Configure the bot
 
@@ -131,7 +134,8 @@ Fork it, copy it, paste it, make love to it...
 
 There's a fair few resources on the interwebs on how to create discord bots and slash commands, as well as information on hosting bots on your own or a remote server.  
 
-This bot was made with JavaScript, and one of the better resources on the `discord.js` library can be found [here](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)  
+This bot was made with JavaScript, and one of the better resources on the `discord.js` library can be found <a href="https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot" target="_blank">here</a>.  
 
-Another good source of information that I used while making this bot were the videos of [Under Ctrl](https://www.youtube.com/@UnderCtrl).  
+Another good source of information that I used while making this bot were the videos of <a href="https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot" target="_blank">Under Ctrl</a>.   
 Be sure to check him out and support his channel!
+
