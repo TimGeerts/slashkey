@@ -56,11 +56,11 @@ The following modal window will show up in your discord, make sure you have all 
 
 | Setting      | Description | Used for |
 | ----------- | ----------- | - |
-| BOT MAINTAINER ROLE      | The role id for admins of the bot  | Using the `🔒` reaction on a posted run can only be done by the author of the key or a user with this role using the `/configure` command is also restricted to this role after its first usage |
-| TANK ROLE   | The role id used for the `Tank` role        | Role used to ping tanks, should they be needed for a posted run |
-| HEALER ROLE   | The role id used for the `Healer` role        | Role used to ping healers, should they be needed for a posted run |
-| DPS ROLE   | The role id used for the `Dps` role        | Role used to ping dps, should they be needed for a posted run |
-| LOG CHANNEL   | The channel id the bot can log to        | The logchannel is used for the bot's error messages and debug messages (if debugging is enabled) |
+| BOT MAINTAINER ROLE   | The role id for admins of the bot         | Using the `🔒` reaction on a posted run can only be done by the author of the key or a user with this role, using the `/configure` command is also restricted to this role after its first usage |
+| TANK ROLE             | The role id used for the `Tank` role      | Role used to ping tanks, should they be needed for a posted run |
+| HEALER ROLE           | The role id used for the `Healer` role    | Role used to ping healers, should they be needed for a posted run |
+| DPS ROLE              | The role id used for the `Dps` role       | Role used to ping dps, should they be needed for a posted run |
+| LOG CHANNEL           | The channel id the bot can log to         | The logchannel is used for the bot's error messages and debug messages (if debugging is enabled) |
   
 ### 3️⃣ Validate the configuration
 
