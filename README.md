@@ -19,7 +19,7 @@ This bot is designed to help you easily create and manage mythic+ runs within yo
 ### 1.0.0 - Initial commit
 
 - Added Dragonflight Season 3 dungeons
-- Added `/configure` and `/key` commands
+- Added `/configure`, `/key` and `/debug` commands
 
 ## 🛑 Requirements
 
@@ -41,7 +41,7 @@ As a prerequisite for using this bot, your Discord server should have the follow
 
 **Link coming soon!**
 
-[//]: # "https://discord.com/oauth2/authorize?client_id=1214206044168003614&permissions=2147494976&scope=bot+applications.commands"
+[//]: # 'https://discord.com/oauth2/authorize?client_id=1214206044168003614&permissions=2147494976&scope=bot+applications.commands'
 
 Use <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">this link</a> to invite SlashKey to your discord server
 
@@ -52,20 +52,20 @@ Use the `/configure` command to do so
 
 > After the first successful usage of the `/configure` command, this command will be restricted to users with the `BOT MAINTAINER ROLE` role.
 
-![SlashKey configure command example](/assets/slashkey-configurate-command.png "SlashKey configure command example")
+![SlashKey configure command example](/assets/slashkey-configurate-command.png 'SlashKey configure command example')
 
 The following modal window will show up in your discord, make sure you have all the needed information at hand to fill it out completely.  
 _(all fields are required for the bot to run smoothly)_
 
-![SlashKey configure modal example](/assets/slashkey-configurate-modal.png "SlashKey configure modal example")
+![SlashKey configure modal example](/assets/slashkey-configurate-modal.png 'SlashKey configure modal example')
 
-| Setting             | Description                            | Used for                                                                                                                                                                                         |
-| ------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| BOT MAINTAINER ROLE | The role id for admins of the bot      | Using the `🔒` reaction on a posted run can only be done by the author of the key or a user with this role, using the `/configure` command is also restricted to this role after its first usage |
-| TANK ROLE           | The role id used for the `Tank` role   | Role used to ping tanks, should they be needed for a posted run                                                                                                                                  |
-| HEALER ROLE         | The role id used for the `Healer` role | Role used to ping healers, should they be needed for a posted run                                                                                                                                |
-| DPS ROLE            | The role id used for the `Dps` role    | Role used to ping dps, should they be needed for a posted run                                                                                                                                    |
-| LOG CHANNEL         | The channel id the bot can log to      | The logchannel is used for the bot's error messages and debug messages (if debugging is enabled)                                                                                                 |
+| Setting             | Description                            | Used for                                                                                                                                                                               |
+| ------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BOT MAINTAINER ROLE | The role id for admins of the bot      | Using the `🔒` reaction on a posted run can only be done by the author of the key or a user with this role, using the `/configure` or `/debug` command is also restricted to this role |
+| TANK ROLE           | The role id used for the `Tank` role   | Role used to ping tanks, should they be needed for a posted run                                                                                                                        |
+| HEALER ROLE         | The role id used for the `Healer` role | Role used to ping healers, should they be needed for a posted run                                                                                                                      |
+| DPS ROLE            | The role id used for the `Dps` role    | Role used to ping dps, should they be needed for a posted run                                                                                                                          |
+| LOG CHANNEL         | The channel id the bot can log to      | The logchannel is used for the bot's error messages and debug messages (if debugging is enabled, it's not by default)                                                                  |
 
 ### 3️⃣ Validate the configuration
 
@@ -73,11 +73,11 @@ After submitting this form, the bot will first validate the configuration, it wi
 
 If everything is validated correctly, the user that executed the `/configure` command will receive a message that the configuration has been saved.
 
-![SlashKey configure validation success example](/assets/slashkey-configurate-validation-success.png "SlashKey configure validation success example")
+![SlashKey configure validation success example](/assets/slashkey-configurate-validation-success.png 'SlashKey configure validation success example')
 
 If there were any validation errors, there will be a message detailing the errors in the configuration.
 
-![SlashKey configure validation erriors example](/assets/slashkey-configurate-validation-failed.png "SlashKey configure validation errors example")
+![SlashKey configure validation erriors example](/assets/slashkey-configurate-validation-failed.png 'SlashKey configure validation errors example')
 
 ### 4️⃣ Run a key
 
@@ -89,7 +89,7 @@ The bot will then reply you with a prompt to get all the necessary information t
 > Your server's configuration will again be validated here, to make sure everything is in order to set up the run.  
 > If that validation fails, the command stops and a message will be shown in the chat to indicate the mistakes with the configuration.
 
-![SlashKey command example](/assets/slashkey-key-command.png "SlashKey command example")
+![SlashKey command example](/assets/slashkey-key-command.png 'SlashKey command example')
 
 **Prompts:**
 
@@ -104,7 +104,7 @@ The bot will then reply you with a prompt to get all the necessary information t
 
 After running the command, a signup message will be posted into the chat, pinging the missing roles for the run.
 
-![SlashKey signup message example](/assets/slashkey-embed.png "SlashKey signup message example")
+![SlashKey signup message example](/assets/slashkey-embed.png 'SlashKey signup message example')
 
 #### Signing up for a run
 
@@ -117,7 +117,7 @@ _(if someone wants to tank the run, they can react with '🛡️' and they'll be
 
 After signing up for a run, that Discord member will be listed in the signup message.
 
-![SlashKey signed example](/assets/slashkey-embed-signed.png "SlashKey signed example")
+![SlashKey signed example](/assets/slashkey-embed-signed.png 'SlashKey signed example')
 
 #### Locking the run
 
@@ -134,7 +134,7 @@ This setting is not configurable for now.
 
 And go slay some demons/dragons/dwarves for purple pixels!
 
-![Mythic Plus](https://media.makeameme.org/created/goes-into-mythic.jpg "Mythic Plus")
+![Mythic Plus](https://media.makeameme.org/created/goes-into-mythic.jpg 'Mythic Plus')
 
 ## 📃 License
 
