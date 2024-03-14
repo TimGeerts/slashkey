@@ -3,10 +3,10 @@ module.exports = {
     // first validate if all properties are available
     let ret = [];
     const settingsToCheck = [
-      'devRole',
-      'tankRole',
-      'healerRole',
-      'dpsRole',
+      'devRoleId',
+      'tankRoleId',
+      'healerRoleId',
+      'dpsRoleId',
       'logChannelId',
     ];
     settingsToCheck.forEach((s) => {
@@ -15,38 +15,38 @@ module.exports = {
       }
     });
     // I could make all of these "else if" statements, but I'd rather have the complete validation message in one go
-    if (!roleExists(settings.devRole, guild)) {
+    if (!roleExists(settings.devRoleId, guild)) {
       ret.push(
-        `* The property \`devRole\` does not match a role on your server`
+        `* The role \`${settings.devRole}\` does not match a role on your server`
       );
     }
-    if (!roleExists(settings.tankRole, guild)) {
+    if (!roleExists(settings.tankRoleId, guild)) {
       ret.push(
-        `* The property \`tankRole\` does not match a role on your server`
+        `* The role \`${settings.tankRole}\` does not match a role on your server`
       );
     }
-    if (!roleExists(settings.healerRole, guild)) {
+    if (!roleExists(settings.healerRoleId, guild)) {
       ret.push(
-        `* The property \`healerRole\` does not match a role on your server`
+        `* The role \`${settings.healerRole}\` does not match a role on your server`
       );
     }
-    if (!roleExists(settings.dpsRole, guild)) {
+    if (!roleExists(settings.dpsRoleId, guild)) {
       ret.push(
-        `* The property \`dpsRole\` does not match a role on your server`
+        `* The role \`${settings.dpsRole}\` does not match a role on your server`
       );
     }
     if (!channelExists(settings.logChannelId, guild)) {
       ret.push(
-        `* The property \`logChannelId\` does not match a channel on your server`
+        `* The channel \`${settings.logChannel}\` does not match a channel on your server`
       );
     }
     return ret;
   },
 };
 
-function roleExists(roleId, guild) {
-  return !!guild.roles.cache.find((r) => r.id === roleId);
+function roleExists(role, guild) {
+  return !!guild.roles.cache.find((r) => r.id === role);
 }
-function channelExists(channelId, guild) {
-  return !!guild.channels.cache.find((c) => c.id === channelId);
+function channelExists(channel, guild) {
+  return !!guild.channels.cache.find((c) => c.id === channel);
 }

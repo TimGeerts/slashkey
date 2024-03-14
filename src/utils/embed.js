@@ -10,7 +10,9 @@ module.exports = {
     if (!embed?.data?.fields) return;
     const userTag = `<@${userId}>`;
     // determine if the current user has already signed (only used for 'add' action)
-    const signed = embed.data.fields.some((f) => f.value === userTag);
+    const signed = embed.data.fields
+      .filter((f) => f.name !== 'Author of this run')
+      .some((f) => f.value === userTag);
     // determine the fields we need based on the role/emoji
     const fields = embed.data.fields.filter((f) => f.name === roleEmoji);
 

@@ -121,12 +121,17 @@ module.exports = {
       .setTimestamp()
       .setTitle(title)
       .setDescription(remark ? remark : ' ')
-      .addFields({ name: '\u200B', value: '\u200B', inline: true });
+      .addFields({
+        name: `Author of this run`,
+        value: `<@${interaction.user.id}>`,
+        inline: true,
+      })
+      .addFields({ name: '\u200B', value: 'Signups:', inline: false });
 
     // is a tank needed?
     if (tankNeeded) {
       rolesMissing.push({
-        id: guildSettings.tankRole,
+        id: guildSettings.tankRoleId,
         name: 'Tank',
         emoji: Emoji['Tank'],
       });
@@ -135,7 +140,7 @@ module.exports = {
     // is a healer needed?
     if (healerNeeded) {
       rolesMissing.push({
-        id: guildSettings.healerRole,
+        id: guildSettings.healerRoleId,
         name: 'Healer',
         emoji: Emoji['Healer'],
       });
@@ -144,7 +149,7 @@ module.exports = {
     // are dps needed?
     if (dpsCount > 0) {
       rolesMissing.push({
-        id: guildSettings.dpsRole,
+        id: guildSettings.dpsRoleId,
         name: 'Dps',
         emoji: Emoji['Dps'],
       });
@@ -215,7 +220,7 @@ module.exports = {
       // check if the user has the developer role (devRole)
       const memberForUser = await interaction.guild.members.fetch(user.id);
       const userHasDevRole = memberForUser.roles.cache.some(
-        (r) => r.id === guildSettings.devRole
+        (r) => r.id === guildSettings.devRoleId
       );
 
       logDebug(

@@ -16,6 +16,12 @@ This bot is designed to help you easily create and manage mythic+ runs within yo
 
 ## 📑 Changelog
 
+### 1.1.0 - Names over Id's
+
+- Add author information to signup message of the the `/key` command
+- Update the `/configure` command so you can add the names of the roles/channels in the modal in stead of the id's
+  - id's will be fetched by the bot and stored alongside the names, if you ever change a rolename or channel name, the bot should keep working ... should
+
 ### 1.0.0 - Initial commit
 
 - Added Dragonflight Season 3 dungeons
@@ -59,13 +65,13 @@ _(all fields are required for the bot to run smoothly)_
 
 ![SlashKey configure modal example](/assets/slashkey-configurate-modal.png 'SlashKey configure modal example')
 
-| Setting             | Description                            | Used for                                                                                                                                                                               |
-| ------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| BOT MAINTAINER ROLE | The role id for admins of the bot      | Using the `🔒` reaction on a posted run can only be done by the author of the key or a user with this role, using the `/configure` or `/debug` command is also restricted to this role |
-| TANK ROLE           | The role id used for the `Tank` role   | Role used to ping tanks, should they be needed for a posted run                                                                                                                        |
-| HEALER ROLE         | The role id used for the `Healer` role | Role used to ping healers, should they be needed for a posted run                                                                                                                      |
-| DPS ROLE            | The role id used for the `Dps` role    | Role used to ping dps, should they be needed for a posted run                                                                                                                          |
-| LOG CHANNEL         | The channel id the bot can log to      | The logchannel is used for the bot's error messages and debug messages (if debugging is enabled, it's not by default)                                                                  |
+| Setting             | Description                             | Used for                                                                                                                                                                               |
+| ------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BOT MAINTAINER ROLE | The rolename for admins of the bot      | Using the `🔒` reaction on a posted run can only be done by the author of the key or a user with this role, using the `/configure` or `/debug` command is also restricted to this role |
+| TANK ROLE           | The rolename used for the `Tank` role   | Role used to ping tanks, should they be needed for a posted run                                                                                                                        |
+| HEALER ROLE         | The rolename used for the `Healer` role | Role used to ping healers, should they be needed for a posted run                                                                                                                      |
+| DPS ROLE            | The rolename used for the `Dps` role    | Role used to ping dps, should they be needed for a posted run                                                                                                                          |
+| LOG CHANNEL         | The channelname the bot can log to      | The logchannel is used for the bot's error messages and debug messages (if debugging is enabled, it's not by default)                                                                  |
 
 ### 3️⃣ Validate the configuration
 

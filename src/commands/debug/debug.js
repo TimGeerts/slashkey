@@ -32,13 +32,13 @@ module.exports = {
       return;
     }
 
-    if (guildSettings.devRole) {
+    if (guildSettings.devRoleId) {
       // if there's saved guildsettings, check if the user has the dev role to execute this command
       const memberForUser = await interaction.guild.members.fetch(
         interaction.user.id
       );
       commandAllowed = memberForUser.roles.cache.some(
-        (r) => r.id === guildSettings.devRole
+        (r) => r.id === guildSettings.devRoleId
       );
     } else {
       interaction.reply(

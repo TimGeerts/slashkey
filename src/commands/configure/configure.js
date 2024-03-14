@@ -12,23 +12,23 @@ const { getGuild, setGuild } = require('../../utils/db');
 const inputFields = [
   {
     customId: 'devRole',
-    label: 'Bot maintainer role (id)',
+    label: 'Bot maintainer role (name)',
   },
   {
     customId: 'tankRole',
-    label: 'Tank role (id)',
+    label: 'Tank role (name)',
   },
   {
     customId: 'healerRole',
-    label: 'Healer role (id)',
+    label: 'Healer role (name)',
   },
   {
     customId: 'dpsRole',
-    label: 'Dps role (id)',
+    label: 'Dps role (name)',
   },
   {
-    customId: 'logChannelId',
-    label: 'Log channel (id)',
+    customId: 'logChannel',
+    label: 'Log channel (name)',
   },
 ];
 
@@ -44,13 +44,13 @@ module.exports = {
     const guildId = guild.id;
     const guildSettings = await getGuild(guildId);
 
-    if (guildSettings && guildSettings.devRole) {
+    if (guildSettings && guildSettings.devRoleId) {
       // if there's saved guildsettings, check if the user has the dev role to execute this command
       const memberForUser = await interaction.guild.members.fetch(
         interaction.user.id
       );
       commandAllowed = memberForUser.roles.cache.some(
-        (r) => r.id === guildSettings.devRole
+        (r) => r.id === guildSettings.devRoleId
       );
     }
 
@@ -104,17 +104,21 @@ module.exports = {
         });
         configuration['debugEnabled'] = 'false';
         configuration['id'] = guildId;
-        await setGuild(configuration);
+
+        convertConfiguration(configuration, guild);
         const validations = validateSettings(configuration, guild);
 
-        let reply =
-          ':white_check_mark: Your configuration has been saved and validated.';
+        let reply = '';
         if (validations?.length) {
           validations.push(
             '\n**Please run the `/configure` command again to fix the errors.\nThe bot will not run correctly until these issues are resolved.**'
           );
           const validationMessages = validations.join('\n');
-          reply = `:x: **Your configuration has some validation errors**\n${validationMessages}`;
+          reply = `:x: **Your configuration was not saved due to some validation errors**\n${validationMessages}`;
+        } else {
+          await setGuild(configuration);
+          reply =
+            ':white_check_mark: Your configuration has been saved and validated.';
         }
         modalInteraction.reply({
           content: reply,
@@ -130,3 +134,31 @@ module.exports = {
     deleted: false,
   },
 };
+
+function convertConfiguration(configuration, guild) {
+  configuration.devRoleId = getRoleIdForName(configuration.devRole, guild);
+  configuration.tankRoleId = getRoleIdForName(configuration.tankRole, guild);
+  configuration.healerRoleId = getRoleIdForName(
+    configuration.healerRole,
+    guild
+  );
+  configuration.dpsRoleId = getRoleIdForName(configuration.dpsRole, guild);
+  configuration.logChannelId = getChannelIdForName(
+    configuration.logChannel,
+    guild
+  );
+}
+
+function getRoleIdForName(roleName, guild) {
+  const role = guild.roles.cache.find(
+    (r) => r.name.toLowerCase() === roleName.toLowerCase()
+  );
+  return role?.id;
+}
+
+function getChannelIdForName(channelName, guild) {
+  const channel = guild.channels.cache.find(
+    (c) => c.name.toLowerCase() === channelName.toLowerCase()
+  );
+  return channel?.id;
+}
