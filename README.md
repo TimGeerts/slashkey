@@ -47,9 +47,7 @@ As a prerequisite for using this bot, your Discord server should have the follow
 
 **Link coming soon!**
 
-[//]: # 'https://discord.com/oauth2/authorize?client_id=1214206044168003614&permissions=2147494976&scope=bot+applications.commands'
-
-Use <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">this link</a> to invite SlashKey to your discord server
+Use <a href="https://discord.com/oauth2/authorize?client_id=1214206044168003614&permissions=2147494976&scope=bot+applications.commands" target="_blank">this link</a> to invite SlashKey to your discord server
 
 ### 2️⃣ Configure the bot
 
