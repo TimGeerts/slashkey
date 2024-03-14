@@ -45,8 +45,6 @@ As a prerequisite for using this bot, your Discord server should have the follow
 
 ### 1️⃣ Invite the bot to your discord
 
-**Link coming soon!**
-
 Use <a href="https://discord.com/oauth2/authorize?client_id=1214206044168003614&permissions=2147494976&scope=bot+applications.commands" target="_blank">this link</a> to invite SlashKey to your discord server
 
 ### 2️⃣ Configure the bot
