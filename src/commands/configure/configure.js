@@ -7,7 +7,7 @@ const {
 } = require('discord.js');
 const { validateSettings } = require('../../utils/settings');
 const { logError, getLogChannel } = require('../../utils/logger');
-const { getGuild, setGuild } = require('../../utils/db');
+const { getGuild, setGuild, logDbError } = require('../../utils/db');
 
 const inputFields = [
   {
@@ -43,6 +43,12 @@ module.exports = {
     const guild = interaction.guild;
     const guildId = guild.id;
     const guildSettings = await getGuild(guildId);
+    if (!guildSettings) {
+      console.log(
+        `bot command executed but no guild information found for guildId ${guildId}`
+      );
+      return;
+    }
 
     if (guildSettings && guildSettings.devRoleId) {
       // if there's saved guildsettings, check if the user has the dev role to execute this command
@@ -116,9 +122,13 @@ module.exports = {
           const validationMessages = validations.join('\n');
           reply = `:x: **Your configuration was not saved due to some validation errors**\n${validationMessages}`;
         } else {
-          await setGuild(configuration);
-          reply =
-            ':white_check_mark: Your configuration has been saved and validated.';
+          const saved = await setGuild(configuration);
+          if (!saved) {
+            reply = `:x: Your configuration was valid but **something went wrong with saving it**.\nContact the author of the bot to check what's wrong ([log an issue](https://github.com/TimGeerts/slashkey/issues)).`;
+          } else {
+            reply =
+              ':white_check_mark: Your configuration was valid and has been saved.\n:white_check_mark: The bot should now be up and running!';
+          }
         }
         modalInteraction.reply({
           content: reply,
@@ -126,10 +136,10 @@ module.exports = {
         });
       })
       .catch((err) => {
-        logError(err.message, logChannel);
+        logDbError(guildId, `slash command 'configure' failed`, err);
+        logError(err, logChannel);
       });
   },
-
   options: {
     deleted: false,
   },

@@ -16,6 +16,12 @@ This bot is designed to help you easily create and manage mythic+ runs within yo
 
 ## 📑 Changelog
 
+### 1.1.1 - Logging
+
+- Added error logging to `Supabase` database just in case anything goes haywire
+- Stop saving configurations when there were validation messages
+- Log errors to the `LOG CHANNEL` set in the configuration
+
 ### 1.1.0 - Names over Id's
 
 - Add author information to signup message of the the `/key` command
