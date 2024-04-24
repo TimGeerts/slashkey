@@ -7,14 +7,14 @@ const { getGuild, logDbError } = require('../../utils/db');
 
 const collectorTimeOut = 600_000;
 const dungeons = [
-  `Atal'Dazar`,
-  `Blackrook Hold`,
-  `Darkheart Thicket`,
-  `Dawn: Galakrond's Fall`,
-  `Dawn: Murozond's Rise`,
-  `The Everbloom`,
-  `Throne of the Tides`,
-  `Waycrest Manor`,
+  `Algeth'ar Academy`,
+  `Brackenhide Hollow`,
+  `Halls of Infusion`,
+  `Neltharus`,
+  `Ruby Life Pools`,
+  `The Azure Vault`,
+  `The Nokhud Offensive`,
+  `Uldaman: Legacy of Tyr`,
 ];
 const Emoji = {
   Tank: '🛡️',

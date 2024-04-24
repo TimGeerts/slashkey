@@ -16,6 +16,11 @@ This bot is designed to help you easily create and manage mythic+ runs within yo
 
 ## 📑 Changelog
 
+### 2.0.0 - Dragonflight Season 4
+
+- Added Dragonflight Season 4 dungeons
+- Removed Dragonflight Season 3 dungeons
+
 ### 1.1.1 - Logging
 
 - Added error logging to `Supabase` database just in case anything goes haywire
