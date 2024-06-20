@@ -5,7 +5,6 @@ const { validateSettings } = require('../../utils/settings');
 
 const { getGuild, logDbError } = require('../../utils/db');
 
-const collectorTimeOut = 600_000;
 const dungeons = [
   `Algeth'ar Academy`,
   `Brackenhide Hollow`,
@@ -207,7 +206,7 @@ module.exports = {
       };
       const collector = message.createReactionCollector({
         filter,
-        time: collectorTimeOut,
+        time: guildSettings.keyTimeout,
         dispose: true,
       });
 
