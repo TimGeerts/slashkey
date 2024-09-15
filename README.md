@@ -16,6 +16,10 @@ This bot is designed to help you easily create and manage mythic+ runs within yo
 
 ## 📑 Changelog
 
+### 3.0.0 - The War Within Season 1
+
+- Added TWW Season 1 dungeons
+
 ### 2.0.0 - Dragonflight Season 4
 
 - Added Dragonflight Season 4 dungeons

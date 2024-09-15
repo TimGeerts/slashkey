@@ -6,14 +6,14 @@ const { validateSettings } = require('../../utils/settings');
 const { getGuild, logDbError } = require('../../utils/db');
 
 const dungeons = [
-  `Algeth'ar Academy`,
-  `Brackenhide Hollow`,
-  `Halls of Infusion`,
-  `Neltharus`,
-  `Ruby Life Pools`,
-  `The Azure Vault`,
-  `The Nokhud Offensive`,
-  `Uldaman: Legacy of Tyr`,
+  `Ara-Kara, City of Echoes`,
+  `The Stonevault`,
+  `The Dawnbreaker`,
+  `City of Threads`,
+  `Mists of Tirna Scithe`,
+  `The Necrotic Wake`,
+  `Siege of Boralus`,
+  `Grim Batol`,
 ];
 const Emoji = {
   Tank: '🛡️',
