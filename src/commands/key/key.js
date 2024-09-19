@@ -154,7 +154,9 @@ module.exports = {
           name: 'Dps',
           emoji: Emoji['Dps'],
         });
-        embed.addFields({ name: Emoji['Dps'], value: '...' });
+        for (let index = 0; index < dpsCount; index++) {
+          embed.addFields({ name: Emoji['Dps'], value: '...' });
+        }
       }
 
       logDebug(
