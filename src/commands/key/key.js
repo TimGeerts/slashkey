@@ -13,7 +13,7 @@ const dungeons = [
   `Mists of Tirna Scithe`,
   `The Necrotic Wake`,
   `Siege of Boralus`,
-  `Grim Batol`,
+  `Grim Butthole`,
 ];
 const Emoji = {
   Tank: '🛡️',
