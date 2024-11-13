@@ -3,7 +3,7 @@
 Welcome to the SlashKey Discord Bot for World of Warcraft!  
 This bot is designed to help you easily create and manage mythic+ runs within your Discord server.
 
-> The bot has been updated for Dragonflight Season 3
+> The bot has been updated for The War Within Season 1
 
 **Disclaimer:** This bot is not affiliated with or endorsed by Blizzard Entertainment. World of Warcraft is a registered trademark of Blizzard Entertainment, Inc.
 
