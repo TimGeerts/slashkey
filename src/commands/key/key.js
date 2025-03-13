@@ -6,14 +6,14 @@ const { validateSettings } = require('../../utils/settings');
 const { getGuild, logDbError } = require('../../utils/db');
 
 const dungeons = [
-  `Ara-Kara, City of Echoes`,
-  `The Stonevault`,
-  `The Dawnbreaker`,
-  `City of Threads`,
-  `Mists of Tirna Scithe`,
-  `The Necrotic Wake`,
-  `Siege of Boralus`,
-  `Grim Butthole`,
+  `Cinderbrew Meadery`,
+  `Darkflame Cleft`,
+  `The Rookery`,
+  `Priory of the Sacred Flame`,
+  `Operation: Floodgate`,
+  `The MOTHERLODE!!`,
+  `Theater of Pain`,
+  `Operation: Mechagon - Workshop`,
 ];
 const Emoji = {
   Tank: '🛡️',

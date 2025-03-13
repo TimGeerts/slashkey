@@ -16,6 +16,10 @@ This bot is designed to help you easily create and manage mythic+ runs within yo
 
 ## 📑 Changelog
 
+### 3.1.0 - The War Within Season 2
+
+- Added TWW Season 2 dungeons
+
 ### 3.0.1 - Bugfixes
 
 - Key command was ignoring multiple dps roles and only showing one signup line even for 3 dps
