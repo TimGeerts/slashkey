@@ -16,6 +16,10 @@ This bot is designed to help you easily create and manage mythic+ runs within yo
 
 ## 📑 Changelog
 
+### 3.2.0 - The War Within Season 3
+
+- Added TWW Season 3 dungeons
+
 ### 3.1.0 - The War Within Season 2
 
 - Added TWW Season 2 dungeons

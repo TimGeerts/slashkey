@@ -6,14 +6,14 @@ const { validateSettings } = require('../../utils/settings');
 const { getGuild, logDbError } = require('../../utils/db');
 
 const dungeons = [
-  `Cinderbrew Meadery`,
-  `Darkflame Cleft`,
-  `The Rookery`,
-  `Priory of the Sacred Flame`,
+  `Eco-Dome Al'dani`,
+  `Ara-Kara, City of Echoes`,
+  `The Dawnbreaker`,
   `Operation: Floodgate`,
-  `The MOTHERLODE!!`,
-  `Theater of Pain`,
-  `Operation: Mechagon - Workshop`,
+  `Priory of the Sacred Flame`,
+  `Halls of Atonement`,
+  `Tazavesh, the Veiled Market: Streets of Wonder`,
+  `Tazavesh, the Veiled Market: So'leah's Gambit`,
 ];
 const Emoji = {
   Tank: '🛡️',
