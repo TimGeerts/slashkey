@@ -16,6 +16,10 @@ This bot is designed to help you easily create and manage mythic+ runs within yo
 
 ## 📑 Changelog
 
+### 4.0.0 - Midnight Season 1
+
+- Added Midnight Season 1 dungeons
+
 ### 3.2.0 - The War Within Season 3
 
 - Added TWW Season 3 dungeons

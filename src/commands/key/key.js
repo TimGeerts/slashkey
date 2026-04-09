@@ -6,14 +6,14 @@ const { validateSettings } = require('../../utils/settings');
 const { getGuild, logDbError } = require('../../utils/db');
 
 const dungeons = [
-  `Eco-Dome Al'dani`,
-  `Ara-Kara, City of Echoes`,
-  `The Dawnbreaker`,
-  `Operation: Floodgate`,
-  `Priory of the Sacred Flame`,
-  `Halls of Atonement`,
-  `Tazavesh, the Veiled Market: Streets of Wonder`,
-  `Tazavesh, the Veiled Market: So'leah's Gambit`,
+  `Algeth'ar Academy`,
+  `Magister's Terrace`,
+  `Maisara Caverns`,
+  `Nexus-Point Xenas`,
+  `Pit of Saron`,
+  `Seat of the Triumvirate`,
+  `Skyreach`,
+  `Windrunner Spire`,
 ];
 const Emoji = {
   Tank: '🛡️',
